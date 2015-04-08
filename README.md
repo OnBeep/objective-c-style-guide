@@ -35,6 +35,7 @@ Here are some of the documents from Apple that informed the style guide. If some
 * [Booleans](#booleans)
 * [Singletons](#singletons)
 * [Imports](#imports)
+* [Macros](#macros)
 * [Xcode Project](#xcode-project)
 
 ## Dot Notation Syntax
@@ -62,8 +63,7 @@ UIApplication.sharedApplication.delegate;
 ```objc
 if (user.isHappy) {
     // Do something
-}
-else {
+} else {
     // Do something else
 }
 ```
@@ -442,6 +442,34 @@ Note: For modules use the [@import](http://clang.llvm.org/docs/Modules.html#usin
 // Views
 #import "NYTButton.h"
 #import "NYTUserView.h"
+```
+
+## Macros
+
+Conditional macros should be explict. This style remains consistent regardless of whether we are assessing one or more conditions.
+
+**For example:**
+
+```objc
+#if defined(RELEASE_PUBLIC)
+Statement to be executed;
+#elif defined(RELEASE_AD_HOC)
+Statement to be executed;
+#else
+Statement to be executed;
+#endif
+```
+
+**Not:**
+
+```objc
+#ifdef RELEASE_PUBLIC
+Statement to be executed;
+#elif RELEASE_AD_HOC
+Statement to be executed;
+#else
+Statement to be executed;
+#endif
 ```
 
 ## Xcode project
