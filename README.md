@@ -224,7 +224,11 @@ Block comments should generally be avoided, as code should be as self-documentin
 
 ## init and dealloc
 
-`dealloc` methods should be placed at the top of the implementation, directly after the `@synthesize` and `@dynamic` statements. `init` should be placed directly below the `dealloc` methods of any class.
+`dealloc` method should be placed below initializers and didReceiveMemoryWarning.
+
+`init` should not contain initialization of instance variables to nil or 0. Objective c does this by default. 
+
+Initialization of objects referenced by a property of the instance should set the instance variable behind the property, rather than referencing self.
 
 `init` methods should be structured like this:
 
@@ -232,12 +236,14 @@ Block comments should generally be avoided, as code should be as self-documentin
 - (instancetype)init {
     self = [super init]; // or call the designated initializer
     if (self) {
-        // Custom initialization
+        _anObject = [[OBObject alloc] init];
     }
 
     return self;
 }
 ```
+
+Initialization of objects should always use the [[OBObject alloc] init] pattern. Do not use [OBObject new].
 
 ## Literals
 
